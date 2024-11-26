@@ -1,0 +1,316 @@
+{
+    "auth_page": {
+        "desc": "Join Connectify today and be part of a vibrant community where connections and conversations happen every day. Your voice matters.",
+        "forgot_password_text": "Forgot your password?",
+        "login_button": "Login",
+        "register_form_chance_text": "Don't have an account? Sign up now",
+        "login_form_chance_text": "Do you have an account? Log in now",
+        "or_text": "OR",
+        "email_input_placeholder": "Email",
+        "password_input_placeholder": "Password",
+        "fullname_input_placeholder": "Full Name",
+        "confirm_password_input_placeholder": "Confirm Password",
+        "register_button": "Register",
+        "loading": "Loading"
+    },
+    "complete_profile_page": {
+        "header": "Complete Profile",
+        "desc": "Complete the missing information in your profile",
+        "follow_button_text": "Follow",
+        "username_input_placeholder": "Username",
+        "country_input_placeholder": "Select a country",
+        "city_input_placeholder": "Select a city",
+        "biography_input_placeholder": "Enter a profile biography",
+        "skip_button": "Skip",
+        "loading": "Loading",
+        "save_button": "Save",
+        "skip_warning_modal": {
+            "header": "Are you sure you want to jump?",
+            "desc": "If you skip this step, your username will be randomly selected as a unique name. Your other profile information will be left blank."
+        }
+    },
+    "home_page": {
+        "refresh_button": "Refresh",
+        "create_post_placeholder": "What is happening?",
+        "create_post_button": "Share",
+        "create_post_button_loading": "Loading",
+        "create_post_tooltip_1": "Upload Image",
+        "create_post_tooltip_2": "Upload Video",
+        "create_post_tooltip_3": "Add Emoji"
+    },
+    "explore_page": {
+        "search_button": "Search",
+        "search_input_placeholder": "Enter a word",
+        "trends_title": "Trends",
+        "trend_tag_sub_text": "Post",
+        "category_tag_1": "Business",
+        "category_tag_2": "Technology",
+        "category_tag_3": "Sports",
+        "category_tag_4": "News",
+        "category_tag_5": "Politics",
+        "category_tag_6": "Entertainment",
+        "category_tag_7": "Science",
+        "results_tab_text_1": "Posts",
+        "results_tab_text_2": "People"
+    },
+    "saved_page": {
+        "title": "Saved",
+        "button": "Clear"
+    },
+    "profile_page": {
+        "set_profile_text": "Set profile",
+        "joined_text": "Joined",
+        "followers_text": "Followers",
+        "following_text": "Following",
+        "recommend_users": {
+            "title": "Recommend Users",
+            "button": "See all"
+        },
+        "profile_user_actions": {
+            "following_status_text": "Following",
+            "follow_requesting_status_text": "Sended",
+            "default_status_text": "Follow"
+        },
+        "profile_posts_tab_text_1": "Posts",
+        "profile_posts_tab_text_2": "Likes",
+        "profile_posts_tab_text_3": "Reposts",
+        "profile_posts_tab_text_4": "Commented"
+    },
+    "post_detail_page": {
+        "title": "Post",
+        "edit_text": "Edit",
+        "delete_text": "Delete",
+        "warning_modal_header": "Are you sure you want to delete the post?",
+        "warning_modal_content": "If you continue your post will be deleted",
+        "views_text": "views",
+        "comments_section": {
+            "comment_title": "Comments",
+            "create_comment_placeholder": "Reply",
+            "create_comment_button": "Reply",
+            "create_comment_button_loading": "Loading",
+            "create_comment_tooltip_1": "Upload Image",
+            "create_comment_tooltip_2": "Upload Video",
+            "create_comment_tooltip_3": "Add Emoji"
+        }
+    },
+    "conversations_page": {
+        "header": "Messages",
+        "not_selected_chat_header_text": "Select a person",
+        "not_selected_chat_text": "Select anyone you want from the contact list and start talking, or you can start chatting with someone new.",
+        "delete_conversation_text": "Delete",
+        "create_conversation_modal": {
+            "header": "Create new conversation",
+            "input_placeholder": "Enter a username or fullname",
+            "message_button_text": "Message",
+            "following_status_text": "Following",
+            "follow_requesting_status_text": "Sended",
+            "default_status_text": "Follow"
+        },
+        "chat_section": {
+            "create_message_tooltip_1": "Upload Image",
+            "create_message_tooltip_2": "Upload Video",
+            "create_message_tooltip_3": "Add Emoji",
+            "input_placeholder": "Enter a message"
+        }
+    },
+    "settings_page": {
+        "header": "Settings",
+        "app_settings_header": "App Settings",
+        "app_settings_text": "To change theme, deleting and exiting account, language settings",
+        "profile_settings_header": "Profile Settings",
+        "profile_settings_text": "To change profile picture, backdrop picture, full name, username, location, biography information",
+        "account_settings_header": "Account Settings",
+        "account_settings_text": "To change password and email",
+        "app_settings": {
+            "change_language_header": "Change Language",
+            "change_language_text": "Experience with different languages",
+            "change_theme_header": "Change theme",
+            "change_theme_text": "Switch between dark or light modes",
+            "themes_text_1": "Light",
+            "themes_text_2": "Dark",
+            "themes_text_3": "System",
+            "delete_account_header": "Delete Account",
+            "delete_account_text": "Delete your account permanently",
+            "delete_account_button": "Delete",
+            "delete_account_modal_header": "Are you sure you want to delete your account?",
+            "delete_account_modal_text": "All your posts, photos , videos and message data in your account will be permanently deleted",
+            "delete_account_modal_button": "Delete My Account"
+        },
+        "profile_settings": {
+            "header_1": "Update Your Profile Pictures",
+            "header_2": "Update Your Profile İnfo",
+            "fullname_input_placeholder": "Fullname",
+            "username_input_placeholder": "Username",
+            "country_input_placeholder": "Select a country",
+            "city_input_placeholder": "Select a city",
+            "biography_input_placeholder": "Enter a profile biography",
+            "save_button": "Save",
+            "loading": "Loading",
+            "update_profile_modal_header": "Are you sure you want to save?",
+            "update_profile_modal_text": "If you press save, your information will be updated. This process cannot be undone."
+        },
+        "account_settings": {
+            "header": "Update Account İnfo",
+            "change_password": {
+                "header": "Update Password",
+                "current_password_input_placeholder": "Current Password",
+                "new_password_input_placeholder": "New Password",
+                "confirm_password_input_placeholder": "New Password Confirm",
+                "forgot_your_password_text": "Forgot your password?",
+                "save_button": "Save",
+                "modal_header": "Are you sure you want to save?",
+                "modal_text": "If you press save, your information will be updated. This process cannot be undone."
+            },
+            "change_email": {
+                "header": "Update Email",
+                "email_input_placeholder": "New Email",
+                "save_button": "Save",
+                "modal_header": "Are you sure you want to save?",
+                "modal_text": "If you press save, your information will be updated. This process cannot be undone."
+            }
+        }
+    },
+    "notifications_page": {
+        "header": "Notifications",
+        "friend_requests_header": "Friend Requests",
+        "friend_requests_text": "You have {count} pending friend requests",
+        "tab_text_1": "New Notifications",
+        "tab_text_2": "Read Notifications",
+        "notification_text_1": "{name} liked to your post.",
+        "notification_text_2": "{name} reposted to your post.",
+        "notification_text_3": "{name} commented to your post.",
+        "notification_text_4": "{name} sended friend request to your "
+    },
+    "recommend_users_page": {
+        "header": "Recommended users for you",
+        "sub_header_text": "Suggested for you"
+    },
+    "followers_page": {
+        "text": "Followers"
+    },
+    "following_page": {
+        "text": "Following"
+    },
+    "components": {
+        "post": {
+            "post_reposted_text": "reposted",
+            "message_button_text": "Send message",
+            "following_status_text": "Following",
+            "follow_requesting_status_text": "Sended",
+            "default_status_text": "Follow",
+            "post_interactions_text_1": "Edit",
+            "post_interactions_text_2": "Delete"
+        },
+        "send_reset_password_modal": {
+            "header": "Send Reset Password Email",
+            "input_placeholder": "Enter your account email",
+            "close_button_text": "Close",
+            "send_button_text": "Send"
+        },
+        "delete_post_button": "Delete",
+        "edit_post_modal": {
+            "modal_button_text": "Update",
+            "modal_header": "Edit Post",
+            "modal_input_placeholder": "What is happening?",
+            "loading": "Loading",
+            "edit_post_tooltip_1": "Upload Image",
+            "edit_post_tooltip_2": "Upload Video",
+            "edit_post_tooltip_3": "Add Emoji",
+            "update_post_modal": {
+                "modal_header": "Are you sure you want to update the post?",
+                "modal_title": "If you continue your post content will be updated"
+            }
+        },
+        "delete_post_modal": {
+            "modal_header": "Are you sure you want to delete the post?",
+            "modal_title": "If you continue your post will be deleted",
+            "modal_button_2": "Delete"
+        },
+        "warning_modal": {
+            "cancel_button": "Cancel"
+        },
+        "follow_button": {
+            "following_status_text": "Following",
+            "follow_requesting_status_text": "Sended",
+            "default_status_text": "Follow"
+        },
+        "hover_profile_card": {
+            "joined_text": "Joined",
+            "followers_text": "Followers",
+            "following_text": "Following"
+        }
+    },
+    "layout_sections": {
+        "aside": {
+            "aside_links_1": "Home",
+            "aside_links_2": "Explore",
+            "aside_links_3": "Messages",
+            "aside_links_4": "Notifications",
+            "aside_links_5": "Saved",
+            "aside_links_6": "Profile",
+            "aside_links_7": "Settings"
+        },
+        "friend_requests": {
+            "title": "Pending requests",
+            "have_any_requests": "No pending requests",
+            "button": "See all",
+            "accept_tooltip": "Accept",
+            "reject_tooltip": "Reject"
+        },
+        "recommend_users": {
+            "title": "Recommend Users",
+            "button": "See all"
+        },
+        "trends": {
+            "title": "Trends",
+            "button": "See all",
+            "trend_tag_sub_text": "Post"
+        },
+        "footer": {
+            "links_1": "Privacy Policy",
+            "links_2": "Cookie Policy",
+            "links_3": "Terms of Service",
+            "rights_reserved_text": "All Rights Reserved"
+        },
+        "header": {
+            "search_section": {
+                "title": "Search",
+                "search_bar_placeholder": "Enter a word",
+                "search_user_tooltip_1": "Send message {name}",
+                "search_user_tooltip_2": "Cancel following",
+                "search_user_tooltip_3": "Follow Request Cancel",
+                "search_user_tooltip_4": "Follow {name}",
+                "cancel_button": "İptal"
+            },
+            "notification_section": {
+                "tooltip": "Notifications",
+                "title": "Notifications",
+                "tab_text_1": "New Notifications",
+                "tab_text_2": "Read Notifications",
+                "button": "See all notifications",
+                "notification_text_1": "{name} liked to your post.",
+                "notification_text_2": "{name} reposted to your post.",
+                "notification_text_3": "{name} commented to your post.",
+                "notification_text_4": "{name} sended friend request to your "
+            },
+            "message_section": {
+                "tooltip": "Messages",
+                "title": "Messages",
+                "tab_text_1": "New Messages",
+                "tab_text_2": "Read Messages",
+                "button": "See all Messages",
+                "message_text_1": "John sent you a message."
+            },
+            "profile_section": {
+                "tooltip": "Profile",
+                "links_1": "Profile",
+                "links_2": "Theme",
+                "links_3": "Settings",
+                "links_4": "Log out",
+                "themes_text_1": "Light",
+                "themes_text_2": "Dark",
+                "themes_text_3": "System"
+            }
+        }
+    }
+}

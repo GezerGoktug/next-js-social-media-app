@@ -1,0 +1,258 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["fullTextSearch"]
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("POSTGRES_PRISMA_URL") 
+}
+
+model User {
+  id                     String             @id @default(cuid())
+  username               String?            @unique @default(cuid())
+  email                  String             @unique
+  password               String?            @unique
+  name                   String             @map("fullname")
+  image                  String?            @map("avatar_image")
+  backdrop_image         String?
+  biography              String?
+  city                   String?
+  country                String?
+  emailVerified          DateTime?
+  resetToken             String?
+  resetTokenExpiresAt    DateTime?
+  accounts               Account[]
+  sessions               Session[]
+  Authenticator          Authenticator[]
+  createdAt              DateTime           @default(now())
+  updatedAt              DateTime           @updatedAt
+  posts                  Post[]
+  comments               Comment[]
+  likes                  Like[]
+  saved                  Saved[]
+  reposts                Repost[]
+  views                  View[]
+  conversations          ConversationUser[]
+  messages               Message[]
+  followers              Follower[]         @relation("userFollowers")
+  following              Follower[]         @relation("userFollowing")
+  followRequestsSent     FriendRequest[]    @relation("FollowRequestsSent")
+  followRequestsReceived FriendRequest[]    @relation("FollowRequestsReceived")
+  notifications          Notification[]
+  sentNotifications      Notification[]     @relation("NotificationSender")
+  messageNotifications   MessageNotify[]
+
+  @@map("Account_Users")
+}
+
+model Account {
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@id([provider, providerAccountId])
+}
+
+model Session {
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model VerificationToken {
+  identifier String
+  token      String
+  expires    DateTime
+
+  @@id([identifier, token])
+}
+
+model Authenticator {
+  credentialID         String  @unique
+  userId               String
+  providerAccountId    String
+  credentialPublicKey  String
+  counter              Int
+  credentialDeviceType String
+  credentialBackedUp   Boolean
+  transports           String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@id([userId, credentialID])
+}
+
+enum MediaType {
+  IMAGE
+  VIDEO
+}
+
+model Media {
+  id           Int       @id @default(autoincrement())
+  type         MediaType
+  url          String
+  post         Post?     @relation("postMedia", fields: [postId], references: [id], onDelete: Cascade)
+  postId       String?   @unique
+  message      Message?  @relation("messageMedia", fields: [messageId], references: [id], onDelete: Cascade)
+  messageId    Int?      @unique
+  commentMedia Comment?  @relation("commentMedia", fields: [commentId], references: [id], onDelete: Cascade)
+  commentId    Int?      @unique
+}
+
+model Post {
+  id                  String         @id @default(cuid())
+  content             String?
+  media               Media?         @relation("postMedia")
+  createdAt           DateTime       @default(now())
+  category            String[]
+  views               View[]
+  user                User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId              String
+  comments            Comment[]
+  likes               Like[]
+  saved               Saved[]
+  reposts             Repost[]
+  linkedNotifications Notification[]
+}
+
+model View {
+  id     Int    @id @default(autoincrement())
+  post   Post   @relation(fields: [postId], references: [id], onDelete: Cascade)
+  postId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String
+}
+
+model Comment {
+  id        Int      @id @default(autoincrement())
+  content   String?
+  media     Media?   @relation("commentMedia")
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String
+  post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
+  postId    String
+}
+
+model Like {
+  id     Int    @id @default(autoincrement())
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String
+  post   Post   @relation(fields: [postId], references: [id], onDelete: Cascade)
+  postId String
+}
+
+model Saved {
+  id     Int    @id @default(autoincrement())
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String
+  post   Post   @relation(fields: [postId], references: [id], onDelete: Cascade)
+  postId String
+
+  @@unique([userId, postId])
+}
+
+model Repost {
+  id     Int    @id @default(autoincrement())
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String
+  post   Post   @relation(fields: [postId], references: [id], onDelete: Cascade)
+  postId String
+
+  @@unique([userId, postId])
+}
+
+model Conversation {
+  id        String             @id @default(cuid())
+  createdAt DateTime           @default(now())
+  users     ConversationUser[]
+  messages  Message[]
+}
+
+model ConversationUser {
+  id             Int          @id @default(autoincrement())
+  conversation   Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  conversationId String
+  user           User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId         String
+}
+
+model Message {
+  id             Int             @id @default(autoincrement())
+  content        String?
+  media          Media?          @relation("messageMedia")
+  createdAt      DateTime        @default(now())
+  user           User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId         String
+  conversation   Conversation    @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  conversationId String
+  notifications  MessageNotify[]
+}
+
+model Follower {
+  id          Int    @id @default(autoincrement())
+  follower    User   @relation("userFollowers", fields: [followingId], references: [id], onDelete: Cascade)
+  followingId String
+  following   User   @relation("userFollowing", fields: [followerId], references: [id], onDelete: Cascade)
+  followerId  String
+}
+
+model FriendRequest {
+  id         Int    @id @default(autoincrement())
+  sender     User   @relation("FollowRequestsSent", fields: [senderId], references: [id], onDelete: Cascade)
+  senderId   String
+  receiver   User   @relation("FollowRequestsReceived", fields: [receiverId], references: [id], onDelete: Cascade)
+  receiverId String
+
+  @@unique([senderId, receiverId])
+}
+
+model Notification {
+  id        String           @id @default(cuid())
+  read      Boolean          @default(false)
+  type      NotificationType
+  createdAt DateTime         @default(now())
+  user      User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String
+
+  sender   User?   @relation("NotificationSender", fields: [senderId], references: [id], onDelete: Cascade)
+  senderId String?
+
+  post   Post?   @relation(fields: [postId], references: [id], onDelete: Cascade)
+  postId String?
+}
+
+model MessageNotify {
+  id        String   @id @default(cuid())
+  read      Boolean  @default(false)
+  message   Message  @relation(fields: [messageId], references: [id], onDelete: Cascade)
+  messageId Int
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String
+  createdAt DateTime @default(now())
+}
+
+enum NotificationType {
+  LIKE
+  COMMENT
+  FRIEND_REQUEST
+  REPOST
+}

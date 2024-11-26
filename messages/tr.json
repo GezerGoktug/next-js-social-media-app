@@ -1,0 +1,320 @@
+{
+    "auth_page": {
+        "desc": "Connectify'a bugün katılın ve bağlantıların ve konuşmaların her gün gerçekleştiği canlı bir topluluğun parçası olun. Sesiniz önemlidir.",
+        "forgot_password_text": "Şifrenizi mi unuttunuz?",
+        "login_button": "Giriş",
+        "register_form_chance_text": "Hesabınız yok mu? Şimdi kaydolun",
+        "login_form_chance_text": "Hesabınız var mı? Şimdi oturum açın",
+        "or_text": "YA DA",
+        "email_input_placeholder": "E-posta",
+        "password_input_placeholder": "Şifre",
+        "fullname_input_placeholder": "Ad Soyad",
+        "confirm_password_input_placeholder": "Şifreyi Onayla",
+        "register_button": "Kayıt ol",
+        "loading": "Yükleniyor"
+    },
+    "complete_profile_page": {
+        "header": "Profili tamamla",
+        "desc": "Profilinizdeki eksik bilgileri tamamlayın",
+        "follow_button_text": "Takip et",
+        "username_input_placeholder": "Kullanıcı adı",
+        "country_input_placeholder": "Bir ülke seçin",
+        "city_input_placeholder": "Bir şehir seçin",
+        "biography_input_placeholder": "Bir profil biyografisi girin",
+        "skip_button": "Atla",
+        "loading": "Yükleniyor",
+        "save_button": "Kaydet",
+        "skip_warning_modal": {
+            "header": "Atlamak istediğinden emin misin?",
+            "desc": "Bu adımı atlarsanız kullanıcı adınız benzersiz bir ad olarak rastgele seçilecektir. Diğer profil bilgileriniz boş bırakılacaktır.",
+            "cancel_button": "İptal",
+            "skip_button": "Atla"
+        }
+    },
+    "home_page": {
+        "refresh_button": "Yenile",
+        "create_post_placeholder": "Ne düşünüyorsun?",
+        "create_post_button": "Paylaş",
+        "create_post_button_loading": "Yükleniyor",
+        "create_post_tooltip_1": "Resim yükle",
+        "create_post_tooltip_2": "Video yükle",
+        "create_post_tooltip_3": "Emoji ekle"
+    },
+    "explore_page": {
+        "search_button": "Ara",
+        "search_input_placeholder": "Bir kelime girin",
+        "trends_title": "Trendler",
+        "trend_tag_sub_text": "Gönderi",
+        "category_tag_1": "İş",
+        "category_tag_2": "Teknoloji",
+        "category_tag_3": "Spor",
+        "category_tag_4": "Haberler",
+        "category_tag_5": "Politika",
+        "category_tag_6": "Eğlence",
+        "category_tag_7": "Bilim",
+        "results_tab_text_1": "Gönderiler",
+        "results_tab_text_2": "Kullanıcılar"
+    },
+    "saved_page": {
+        "title": "Kaydedilenler",
+        "button": "Temizle"
+    },
+    "profile_page": {
+        "set_profile_text": "Profili ayarla",
+        "joined_text": "Katıldı",
+        "followers_text": "Takipçiler",
+        "following_text": "Takip Edilenler",
+        "recommend_users": {
+            "title": "Önerilen Kullanıcılar",
+            "button": "Tümünü gör"
+        },
+        "profile_user_actions": {
+            "following_status_text": "Takip ediliyor",
+            "follow_requesting_status_text": "Gönderildi",
+            "default_status_text": "Takip et"
+        },
+        "profile_posts_tab_text_1": "Gönderiler",
+        "profile_posts_tab_text_2": "Beğeniler",
+        "profile_posts_tab_text_3": "Yeniden Paylaşılanlar",
+        "profile_posts_tab_text_4": "Yorum Yapılanlar"
+    },
+    "post_detail_page": {
+        "title": "Gönderi",
+        "edit_text": "Düzenle",
+        "delete_text": "Sil",
+        "warning_modal_header": "Gönderiyi silmek istediğinizden emin misiniz?",
+        "warning_modal_content": "Devam ederseniz gönderiniz silinecektir.",
+        "views_text": "görüntülenmeler",
+        "comments_section": {
+            "comment_title": "Yorumlar",
+            "create_comment_placeholder": "Cevapla",
+            "create_comment_button": "Cevapla",
+            "create_comment_button_loading": "Yükleniyor",
+            "create_comment_tooltip_1": "Resim yükle",
+            "create_comment_tooltip_2": "Video yükle",
+            "create_comment_tooltip_3": "Emoji ekle"
+        }
+    },
+    "conversations_page": {
+        "header": "Mesajlar",
+        "not_selected_chat_header_text": "Bir kişi seçin",
+        "not_selected_chat_text": "Kişi listesinden istediğiniz kişiyi seçip konuşmaya başlayın veya yeni biriyle sohbet etmeye başlayabilirsiniz.",
+        "delete_conversation_text": "Sil",
+        "create_conversation_modal": {
+            "header": "Yeni sohbet başlat",
+            "input_placeholder": "Bir kullanıcı adı veya tam ad girin",
+            "message_button_text": "Mesaj",
+            "following_status_text": "Takip ediliyor",
+            "follow_requesting_status_text": "Gönderildi",
+            "default_status_text": "Takip et"
+        },
+        "chat_section": {
+            "create_message_tooltip_1": "Resim yükle",
+            "create_message_tooltip_2": "Video yükle",
+            "create_message_tooltip_3": "Emoji ekle",
+            "input_placeholder": "Bir mesaj girin"
+        }
+    },
+    "settings_page": {
+        "header": "Ayarlar",
+        "app_settings_header": "Uygulama Ayarları",
+        "app_settings_text": "Temayı değiştirmek, hesabı silmek ve çıkmak, dil ayarları",
+        "profile_settings_header": "Profil Ayarları",
+        "profile_settings_text": "Profil resmini, arka plan resmini, tam adı, kullanıcı adını, konumu, biyografi bilgilerini değiştirmek için",
+        "account_settings_header": "Hesap Ayarları",
+        "account_settings_text": "Şifreyi ve e-postayı değiştirmek için",
+        "app_settings": {
+            "change_language_header": "Dili Değiştir",
+            "change_language_text": "Farklı dilleri deneyimleyin",
+            "change_theme_header": "Temayı değiştir",
+            "change_theme_text": "Karanlık veya aydınlık modlar arasında geçiş yapın",
+            "themes_text_1": "Açık",
+            "themes_text_2": "Karanlık",
+            "themes_text_3": "Sistem",
+            "delete_account_header": "Hesabı Sil",
+            "delete_account_text": "Hesabınızı kalıcı olarak silin",
+            "delete_account_button": "Sil",
+            "delete_account_modal_header": "Hesabınızı silmek istediğinizden emin misiniz?",
+            "delete_account_modal_text": "Hesabınızdaki tüm gönderileriniz, fotoğraflarınız, videolarınız ve mesaj verileriniz kalıcı olarak silinecek",
+            "delete_account_modal_button": "Hesabımı Sil"
+        },
+        "profile_settings": {
+            "header_1": "Profil Resimlerinizi Güncelleyin",
+            "header_2": "Profil Bilgilerinizi Güncelleyin",
+            "fullname_input_placeholder": "Ad Soyad",
+            "username_input_placeholder": "Kullanıcı adı",
+            "country_input_placeholder": "Bir ülke seçin",
+            "city_input_placeholder": "Bir şehir seçin",
+            "biography_input_placeholder": "Bir profil biyografisi girin",
+            "save_button": "Kaydet",
+            "loading": "Yükleniyor",
+            "update_profile_modal_header": "Kaydetmek istediğinizden emin misiniz?",
+            "update_profile_modal_text": "Kaydet tuşuna bastığınızda bilgileriniz güncellenecektir. Bu işlem geri alınamaz."
+        },
+        "account_settings": {
+            "header": "Hesap Bilgilerini Güncelle",
+            "change_password": {
+                "header": "Şifreyi Güncelle",
+                "current_password_input_placeholder": "Mevcut Şifre",
+                "new_password_input_placeholder": "Yeni Şifre",
+                "confirm_password_input_placeholder": "Yeni Şifreyi Onayla",
+                "forgot_your_password_text": "Şifrenizi mi unuttunuz?",
+                "save_button": "Kaydet",
+                "modal_header": "Kaydetmek istediğinizden emin misiniz?",
+                "modal_text": "Kaydet tuşuna bastığınızda bilgileriniz güncellenecektir. Bu işlem geri alınamaz."
+            },
+            "change_email": {
+                "header": "E-postayı Güncelle",
+                "email_input_placeholder": "Yeni E-posta",
+                "save_button": "Kaydet",
+                "modal_header": "Kaydetmek istediğinizden emin misiniz?",
+                "modal_text": "Kaydet tuşuna bastığınızda bilgileriniz güncellenecektir. Bu işlem geri alınamaz."
+            }
+        }
+    },
+    "notifications_page": {
+        "header": "Bildirimler",
+        "friend_requests_header": "Arkadaşlık İstekleri",
+        "friend_requests_text": "Bekleyen {count} arkadaşlık isteğiniz var",
+        "tab_text_1": "Yeni Bildirimler",
+        "tab_text_2": "Okunmuş Bildirimler",
+        "notification_text_1": "{name} gönderinizi beğendi.",
+        "notification_text_2": "{name} gönderinizi yeniden yayınladı.",
+        "notification_text_3": "{name} gönderinize yorum yaptı.",
+        "notification_text_4": "{name} sana arkadaşlık isteği yolladı."
+    },
+    "recommend_users_page": {
+        "header": "Sizin için önerilen kullanıcılar",
+        "sub_header_text": "Sizin için önerildi"
+    },
+    "followers_page": {
+        "text": "Takipçiler"
+    },
+    "following_page": {
+        "text": "Takip edilenler"
+    },
+    "components": {
+        "post": {
+            "post_reposted_text": "yeniden paylaştı",
+            "message_button_text": "Mesaj gönder",
+            "following_status_text": "Takip ediliyor",
+            "follow_requesting_status_text": "Gönderildi",
+            "default_status_text": "Takip et",
+            "post_interactions_text_1": "Düzenle",
+            "post_interactions_text_2": "Sil"
+        },
+        "send_reset_password_modal": {
+            "header": "Şifre Sıfırlama E-postası Gönder",
+            "input_placeholder": "Hesabınızın e-postasını girin",
+            "close_button_text": "Kapat",
+            "send_button_text": "Gönder"
+        },
+        "delete_post_button": "Sil",
+        "edit_post_modal": {
+            "modal_button_text": "Güncelle",
+            "modal_header": "Gönderiyi Düzenle",
+            "modal_input_placeholder": "Ne düşünüyorsun?",
+            "loading": "Yükleniyor",
+            "edit_post_tooltip_1": "Resim yükle",
+            "edit_post_tooltip_2": "Video yükle",
+            "edit_post_tooltip_3": "Emoji ekle",
+            "update_post_modal": {
+                "modal_header": "Gönderiyi güncellemek istediğinizden emin misiniz?",
+                "modal_title": "Devam ederseniz gönderiniz güncellenecektir"
+            }
+        },
+        "delete_post_modal": {
+            "modal_header": "Gönderiyi silmek istediğinizden emin misiniz?",
+            "modal_title": "Devam ederseniz gönderiniz silinecektir",
+            "modal_button_1": "İptal",
+            "modal_button_2": "Sil"
+        },
+        "warning_modal": {
+            "cancel_button": "İptal"
+        },
+        "follow_button": {
+            "following_status_text": "Takip ediliyor",
+            "follow_requesting_status_text": "Gönderildi",
+            "default_status_text": "Takip et"
+        },
+        "hover_profile_card": {
+            "joined_text": "Katıldı",
+            "followers_text": "Takipçiler",
+            "following_text": "Takip Edilenler"
+        }
+    },
+    "layout_sections": {
+        "aside": {
+            "aside_links_1": "Ana Sayfa",
+            "aside_links_2": "Keşfet",
+            "aside_links_3": "Mesajlar",
+            "aside_links_4": "Bildirimler",
+            "aside_links_5": "Kaydedilenler",
+            "aside_links_6": "Profilim",
+            "aside_links_7": "Ayarlar"
+        },
+        "friend_requests": {
+            "title": "Bekleyen istekler",
+            "have_any_requests": "Bekleyen istek yok",
+            "button": "Tümünü gör",
+            "accept_tooltip": "Kabul et",
+            "reject_tooltip": "Reddet"
+        },
+        "recommend_users": {
+            "title": "Önerilen Kullanıcılar",
+            "button": "Tümünü gör"
+        },
+        "trends": {
+            "title": "Trendler",
+            "button": "Tümünü gör",
+            "trend_tag_sub_text": "Gönderi"
+        },
+        "footer": {
+            "links_1": "Gizlilik Politikası",
+            "links_2": "Çerez Politikası",
+            "links_3": "Hizmet Şartları",
+            "rights_reserved_text": "Tüm Hakları Saklıdır"
+        },
+        "header": {
+            "search_section": {
+                "title": "Ara",
+                "search_bar_placeholder": "Bir kelime girin",
+                "search_user_tooltip_1": "Mesaj gönder {name}",
+                "search_user_tooltip_2": "Takibi bırak",
+                "search_user_tooltip_3": "İsteği iptal et ",
+                "search_user_tooltip_4": "Takip et {name}",
+                "cancel_button": "İptal"
+            },
+            "tooltip_1": "Mesajlar",
+            "notification_section": {
+                "tooltip": "Bildirimler",
+                "title": "Bildirimler",
+                "tab_text_1": "Yeni Bildirimler",
+                "tab_text_2": "Okunmuş Bildirimler",
+                "button": "Tüm bildirimleri gör",
+                "notification_text_1": "{name} gönderinizi beğendi.",
+                "notification_text_2": "{name} gönderinizi yeniden yayınladı.",
+                "notification_text_3": "{name} gönderinize yorum yaptı.",
+                "notification_text_4": "{name} sana arkadaşlık isteği yolladı."
+            },
+            "message_section": {
+                "tooltip": "Mesajlar",
+                "title": "Mesajlar",
+                "tab_text_1": "Yeni Mesajlar",
+                "tab_text_2": "Okunmuş Mesajlar",
+                "button": "Tüm mesajları gör",
+                "message_text_1": "John sana mesaj gönderdi."
+            },
+            "profile_section": {
+                "tooltip": "Profil",
+                "links_1": "Profilim",
+                "links_2": "Tema",
+                "links_3": "Ayarlar",
+                "links_4": "Çıkış yap",
+                "themes_text_1": "Açık",
+                "themes_text_2": "Karanlık",
+                "themes_text_3": "Sistem"
+            }
+        }
+    }
+}

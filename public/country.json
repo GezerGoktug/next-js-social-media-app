@@ -1,0 +1,83 @@
+[
+    {
+      "country": "United States",
+      "cities": ["New York", "Los Angeles", "Chicago", "Houston", "Phoenix"]
+    },
+    {
+      "country": "Canada",
+      "cities": ["Toronto", "Vancouver", "Montreal", "Calgary", "Edmonton"]
+    },
+    {
+      "country": "United Kingdom",
+      "cities": ["London", "Manchester", "Birmingham", "Leeds", "Glasgow"]
+    },
+    {
+      "country": "Germany",
+      "cities": ["Berlin", "Munich", "Hamburg", "Cologne", "Frankfurt"]
+    },
+    {
+      "country": "France",
+      "cities": ["Paris", "Marseille", "Lyon", "Toulouse", "Nice"]
+    },
+    {
+      "country": "Italy",
+      "cities": ["Rome", "Milan", "Naples", "Turin", "Palermo"]
+    },
+    {
+      "country": "Spain",
+      "cities": ["Madrid", "Barcelona", "Valencia", "Seville", "Bilbao"]
+    },
+    {
+      "country": "Australia",
+      "cities": ["Sydney", "Melbourne", "Brisbane", "Perth", "Adelaide"]
+    },
+    {
+      "country": "Japan",
+      "cities": ["Tokyo", "Osaka", "Kyoto", "Nagoya", "Hiroshima"]
+    },
+    {
+      "country": "China",
+      "cities": ["Beijing", "Shanghai", "Shenzhen", "Guangzhou", "Chengdu"]
+    },
+    {
+      "country": "India",
+      "cities": ["Delhi", "Mumbai", "Bangalore", "Hyderabad", "Chennai"]
+    },
+    {
+      "country": "Brazil",
+      "cities": ["São Paulo", "Rio de Janeiro", "Salvador", "Fortaleza", "Belo Horizonte"]
+    },
+    {
+      "country": "South Africa",
+      "cities": ["Johannesburg", "Cape Town", "Durban", "Pretoria", "Port Elizabeth"]
+    },
+    {
+      "country": "Mexico",
+      "cities": ["Mexico City", "Guadalajara", "Monterrey", "Puebla", "Cancun"]
+    },
+    {
+      "country": "Russia",
+      "cities": ["Moscow", "Saint Petersburg", "Novosibirsk", "Yekaterinburg", "Nizhny Novgorod"]
+    },
+    {
+      "country": "Turkey",
+      "cities": ["Istanbul", "Ankara", "Izmir", "Bursa", "Antalya"]
+    },
+    {
+      "country": "South Korea",
+      "cities": ["Seoul", "Busan", "Incheon", "Daegu", "Gwangju"]
+    },
+    {
+      "country": "Argentina",
+      "cities": ["Buenos Aires", "Córdoba", "Rosario", "Mendoza", "La Plata"]
+    },
+    {
+      "country": "Saudi Arabia",
+      "cities": ["Riyadh", "Jeddah", "Mecca", "Medina", "Dammam"]
+    },
+    {
+      "country": "United Arab Emirates",
+      "cities": ["Dubai", "Abu Dhabi", "Sharjah", "Ajman", "Ras al-Khaimah"]
+    }
+  ]
+  
