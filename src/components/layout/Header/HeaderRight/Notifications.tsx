@@ -43,9 +43,9 @@ const NotificationItem = ({
       case "REPOST":
         return t("notification_text_2",{name:notify?.sender.name});
       case "FRIEND_REQUEST":
-        return t("notification_text_3",{name:notify?.sender.name});
-      case "COMMENT":
         return t("notification_text_4",{name:notify?.sender.name});
+      case "COMMENT":
+        return t("notification_text_3",{name:notify?.sender.name});
     }
   };
 
