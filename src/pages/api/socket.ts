@@ -59,35 +59,23 @@ export default function SocketHandler(
       socket.join(userId as string);
     }
     socket.on("notification", (notify, userId) => {
-      console.log("Received notify from client:", notify);
-
       io.to(userId).emit("notification", notify);
     });
     socket.on("message", (notify, userId) => {
-      console.log("Received message notify from client:", notify);
-
       io.to(userId).emit("message", notify);
     });
 
     socket.on("leaveConversation", (conversationId) => {
       if (conversationId) {
         socket.leave(conversationId);
-        console.log(`${socket.id} left conversation ${conversationId}`);
       }
     });
     socket.on("joinConversation", (conversationId) => {
-      console.log(conversationId);
-
       if (conversationId) {
-        socket.join(conversationId); // Odaya katıl
-        console.log(`${socket.id} joined conversation ${conversationId}`);
+        socket.join(conversationId);
       }
     });
-
-    // Listen for message event from the client
     socket.on("message", (conversationId, message) => {
-      console.log("Received message from client:", message);
-
       io.in(conversationId as string).emit("message", message);
     });
 
