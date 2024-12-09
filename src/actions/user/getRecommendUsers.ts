@@ -27,9 +27,6 @@ const getRecommendUsers = async (extended?: boolean) => {
     take: extended ? 20 : 3,
   });
 
-  console.log(users);
-  
-
   return users;
 };
 
