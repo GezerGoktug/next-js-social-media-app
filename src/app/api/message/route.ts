@@ -1,4 +1,5 @@
 import { getUserId } from "@/actions/util/getUserInfos";
+import { UnauthorizedError } from "@/error/UnauthorizedError";
 import { storage } from "@/lib/firebase";
 import prisma from "@/lib/prisma";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
@@ -6,16 +7,19 @@ import { NextRequest, NextResponse } from "next/server";
 import { v7 as uuidv7 } from "uuid";
 
 export async function POST(req: Request) {
-
   const formData = await req.formData();
-
-  const userId = await getUserId();
-  
   const mediaFile = formData.get("mediaFile");
   const mediaType = formData.get("mediaType");
   const conversationId = formData.get("conversationId");
   const content = formData.get("content") as string;
 
+  let userId;
+
+  try {
+    userId = await getUserId();
+  } catch (error: any) {
+    return NextResponse.json({ message: error.message }, { status: 401 });
+  }
 
   if (content.length > 250) {
     return NextResponse.json(
@@ -54,7 +58,7 @@ export async function POST(req: Request) {
     } catch (error) {
       return NextResponse.json(
         { message: "Message media could not be upload" },
-        { status: 400 }
+        { status: 500 }
       );
     }
   }
@@ -84,7 +88,7 @@ export async function POST(req: Request) {
   } catch (error) {
     return NextResponse.json(
       { message: "Message could not be sent" },
-      { status: 400 }
+      { status: 500 }
     );
   }
 }
@@ -92,14 +96,16 @@ export async function POST(req: Request) {
 export async function GET(req: NextRequest) {
   const conversationId = req.nextUrl.searchParams.get("conversationId");
 
-  if (!conversationId)
-    return NextResponse.json(
-      { message: "Not founded conversation" },
-      { status: 400 }
-    );
-
+  
   try {
     const userId = await getUserId();
+
+    if (!conversationId)
+      return NextResponse.json(
+        { message: "Not founded conversation" },
+        { status: 400 }
+      );
+      
     const messages = await prisma.message.findMany({
       where: {
         conversationId,
@@ -124,9 +130,12 @@ export async function GET(req: NextRequest) {
     }));
     return NextResponse.json(editedMessages, { status: 200 });
   } catch (error) {
+    if (error instanceof UnauthorizedError) {
+      return NextResponse.json({ message: error.message }, { status: 401 });
+    }
     return NextResponse.json(
       { message: "Messages could not be received" },
-      { status: 400 }
+      { status: 500 }
     );
   }
 }

@@ -1,4 +1,5 @@
 "use server";
+import { UnauthorizedError } from "@/error/UnauthorizedError";
 import { authOptions } from "@/lib/authOptions";
 import prisma from "@/lib/prisma";
 import { getServerSession } from "next-auth";
@@ -9,7 +10,7 @@ export async function getSession() {
 
 export async function getCurrentUser() {
   const session = await getSession();
-  if (!session) throw new Error("Could not be get session ");
+  if (!session) throw new UnauthorizedError("Could not be get session ");
 
   const user = await prisma.user.findUnique({
     where: {
@@ -30,7 +31,7 @@ export async function getCurrentUser() {
 
 export async function getUserId() {
   const session = await getSession();
-  if (!session) throw new Error("Could not be get session ");
+  if (!session) throw new UnauthorizedError("Could not be get session ");
 
   const data = await prisma.user.findUnique({
     where: { email: session?.user.email },
@@ -43,7 +44,7 @@ export async function getUserId() {
 
 export async function getUsername() {
   const session = await getSession();
-  if (!session) throw new Error("Could not be get session ");
+  if (!session) throw new UnauthorizedError("Could not be get session ");
 
   const data = await prisma.user.findUnique({
     where: { email: session?.user.email },
@@ -56,5 +57,5 @@ export async function getUsername() {
 
 export const controlSession = async () => {
   const session = await getSession();
-  if (!session) throw new Error("Could not be get session ");
+  if (!session) throw new UnauthorizedError("Could not be get session ");
 };

@@ -2,6 +2,7 @@ import { getUserId } from "@/actions/util/getUserInfos";
 import applyPostInteractions from "@/actions/post/applyPostInteractions";
 import prisma from "@/lib/prisma";
 import { NextRequest, NextResponse } from "next/server";
+import { UnauthorizedError } from "@/error/UnauthorizedError";
 
 export async function GET(req: NextRequest) {
   let page = req.nextUrl.searchParams.get("page") as string;
@@ -197,14 +198,16 @@ export async function GET(req: NextRequest) {
     const editedPosts = await applyPostInteractions(combinedPosts);
     return NextResponse.json(editedPosts, { status: 200 });
   } catch (error) {
-    console.log(error);
+    if (error instanceof UnauthorizedError) {
+      return NextResponse.json({ message: error.message }, { status: 401 });
+    }
 
     return NextResponse.json(
       {
         message: "Could not get posts data",
       },
       {
-        status: 400,
+        status: 500,
       }
     );
   }

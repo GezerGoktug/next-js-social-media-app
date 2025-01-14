@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 import { controlSession, getUserId } from "@/actions/util/getUserInfos";
+import { UnauthorizedError } from "@/error/UnauthorizedError";
 
 export async function GET() {
   try {
@@ -53,9 +54,12 @@ export async function GET() {
     });
     return NextResponse.json(conversationsWithOtherUsers, { status: 200 });
   } catch (error) {
+    if (error instanceof UnauthorizedError) {
+      return NextResponse.json({ message: error.message }, { status: 401 });
+    }
     return NextResponse.json(
       { message: "Could not retrieve users you chatted with" },
-      { status: 400 }
+      { status: 500 }
     );
   }
 }
@@ -68,7 +72,7 @@ export async function DELETE(req: Request) {
       {
         error: error.message,
       },
-      { status: 400 }
+      { status: 401 }
     );
   }
 
@@ -86,7 +90,7 @@ export async function DELETE(req: Request) {
       {
         error: "Chat could not be deleted",
       },
-      { status: 400 }
+      { status: 500 }
     );
   }
 }

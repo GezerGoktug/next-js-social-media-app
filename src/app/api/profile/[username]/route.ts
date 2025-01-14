@@ -8,32 +8,36 @@ export async function GET(
 ) {
   try {
     await controlSession();
-  } catch (error : any) {
-    return NextResponse.json({message:error.message}, { status: 200 });
+  } catch (error: any) {
+    return NextResponse.json({ message: error.message }, { status: 401 });
   }
 
-  const user = await prisma.user.findUnique({
-    where: {
-      username: params.username,
-    },
-    select: {
-      id: true,
-      image: true,
-      name: true,
-      username: true,
-      biography: true,
-      city: true,
-      country: true,
-      createdAt: true,
-      backdrop_image: true,
-      _count: {
-        select: {
-          followers: true,
-          following: true,
+  try {
+    const user = await prisma.user.findUnique({
+      where: {
+        username: params.username,
+      },
+      select: {
+        id: true,
+        image: true,
+        name: true,
+        username: true,
+        biography: true,
+        city: true,
+        country: true,
+        createdAt: true,
+        backdrop_image: true,
+        _count: {
+          select: {
+            followers: true,
+            following: true,
+          },
         },
       },
-    },
-  });
+    });
 
-  return NextResponse.json(user, { status: 200 });
+    return NextResponse.json(user, { status: 200 });
+  } catch (error) {
+    return NextResponse.json("Could not be get profile", { status: 500 });
+  }
 }

@@ -93,7 +93,6 @@ const Chat = () => {
       socket?.emit("joinConversation", conversationId);
 
       socket?.on("message", (msg) => {
-        console.log(msg);
 
         setMessages((prev) => [...prev, msg]);
       });
