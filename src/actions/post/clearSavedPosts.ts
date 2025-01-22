@@ -7,13 +7,9 @@ import { revalidatePath } from "next/cache";
 const clearSavedPosts = async () => {
   const userId = await getUserId();
   try {
-    await prisma.post.deleteMany({
+    await prisma.saved.deleteMany({
       where: {
-        saved: {
-          some: {
-            userId: userId,
-          },
-        },
+        userId: userId,
       },
     });
     revalidatePath("/");
