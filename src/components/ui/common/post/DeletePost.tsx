@@ -19,6 +19,8 @@ const DeletePost = ({
   const handleDeleteToPost = async () => {
     try {
       await deletePost(postId);
+      router.refresh();
+
       if (isDetailPage) router.push("/");
 
       toast({

@@ -47,12 +47,14 @@ const updatePost = async (formData: FormData) => {
   try {
     if (mediaFile) {
       await deleteObject(ref(storage, `posts/${userId}/${postId}`));
-      const file = mediaFile as File | null;
-      if (file instanceof File) {
-        const storageRef = ref(storage, `posts/${userId}/${postId}`);
-        await uploadBytes(storageRef, file);
-        media_url = await getDownloadURL(storageRef);
-      }
+
+      const file = new Blob([mediaFile], {
+        type: (mediaFile as any).type || "image/jpeg",
+      });
+      const storageRef = ref(storage, `posts/${userId}/${postId}`);
+      await uploadBytes(storageRef, file);
+      media_url = await getDownloadURL(storageRef);
+
       media = {
         media: {
           update: {
@@ -65,19 +67,55 @@ const updatePost = async (formData: FormData) => {
   } catch (error) {
     throw new Error("Post media could not be upload failed");
   }
+  let categories = [];
+  try {
+    const response = await fetch(process.env.HUGGING_FACE_API_URL as string, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${process.env.HUGGING_FACE_API_TOKEN}`,
+      },
+      body: JSON.stringify({
+        inputs: content,
+        parameters: {
+          candidate_labels: [
+            "business",
+            "technology",
+            "sports",
+            "news",
+            "politics",
+            "entertainment",
+            "science",
+            "other",
+          ],
+        },
+      }),
+    });
+    const { labels, scores } = await response.json();
+
+    const threshold = 0.25;
+
+    const dominantCategories = labels.filter(
+      (_: string, index: number) => scores[index] > scores[0] - threshold
+    );
+    categories = dominantCategories;
+  } catch (error) {
+    throw new Error("Could not be determine of post category");
+  }
   try {
     await prisma.post.update({
       where: {
         id: postId,
+        userId: userId,
       },
       data: {
         content,
+        category: categories,
         ...media,
       },
     });
     return { success: true };
   } catch (error) {
-    throw new Error("Post could not be upload failed");
+    throw new Error("Post could not be update failed");
   }
 };
 

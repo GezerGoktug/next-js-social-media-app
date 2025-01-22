@@ -38,8 +38,10 @@ export async function POST(req: Request) {
   let media = null;
   if (mediaFile) {
     try {
-      const file = mediaFile as File | null;
-      if (file instanceof File) {
+      if (mediaFile) {
+        const file = new Blob([mediaFile], {
+          type: (mediaFile as any).type || "image/jpeg",
+        });
         const storageRef = ref(
           storage,
           `conversation/${conversationId}/${userId}/${uuidv7()}`
@@ -96,7 +98,6 @@ export async function POST(req: Request) {
 export async function GET(req: NextRequest) {
   const conversationId = req.nextUrl.searchParams.get("conversationId");
 
-  
   try {
     const userId = await getUserId();
 
@@ -105,7 +106,7 @@ export async function GET(req: NextRequest) {
         { message: "Not founded conversation" },
         { status: 400 }
       );
-      
+
     const messages = await prisma.message.findMany({
       where: {
         conversationId,

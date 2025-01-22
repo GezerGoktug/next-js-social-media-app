@@ -27,12 +27,13 @@ const createPost = async (formData: FormData) => {
   const postId = uuidv7();
   try {
     if (mediaFile) {
-      const file = mediaFile as File | null;
-      if (file instanceof File) {
-        const storageRef = ref(storage, `posts/${userId}/${postId}`);
-        await uploadBytes(storageRef, file);
-        media_url = await getDownloadURL(storageRef);
-      }
+      const file = new Blob([mediaFile], {
+        type: (mediaFile as any).type || "image/jpeg",
+      });
+      const storageRef = ref(storage, `posts/${userId}/${postId}`);
+      await uploadBytes(storageRef, file);
+      media_url = await getDownloadURL(storageRef);
+
       media = {
         media: {
           create: {

@@ -36,8 +36,11 @@ const completeProfile = async (
 
   const userId = await getUserId();
   try {
-    const profileImg = fileData.get("profileImg") as File | null;
-    if (profileImg instanceof File) {
+    const mediaFile = fileData.get("profileImg");
+    if (mediaFile) {
+      const profileImg = new Blob([mediaFile], {
+        type: (mediaFile as any).type || "image/jpeg",
+      });
       const storageRef = ref(storage, `users/${userId}/avatar_image`);
       await uploadBytes(storageRef, profileImg);
       avatar_image_url = await getDownloadURL(storageRef);
@@ -46,8 +49,11 @@ const completeProfile = async (
     throw new Error("Profile photo upload failed");
   }
   try {
-    const backdropImg = fileData.get("backdropImg") as File | null;
-    if (backdropImg instanceof File) {
+    const mediaFile = fileData.get("backdropImg") as File | null;
+    if (mediaFile) {
+      const backdropImg = new Blob([mediaFile], {
+        type: (mediaFile as any).type || "image/jpeg",
+      });
       const storageRef = ref(storage, `users/${userId}/backdrop_image`);
       await uploadBytes(storageRef, backdropImg);
       backdrop_image_url = await getDownloadURL(storageRef);

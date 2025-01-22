@@ -4,10 +4,11 @@ import { storage } from "@/lib/firebase";
 import {
   deleteObject,
   getDownloadURL,
+  getMetadata,
   ref,
   uploadBytes,
 } from "firebase/storage";
-import { getCurrentUser, getSession, getUserId } from "../util/getUserInfos";
+import { getCurrentUser, getUserId } from "../util/getUserInfos";
 import prisma from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
 import { updateUserSchema } from "@/schemas/schema";
@@ -36,8 +37,9 @@ export const updateProfile = async (
     backdropImg,
   });
 
-  if (!validate.success)
-    throw new Error(validate.error.flatten().fieldErrors as string);
+  if (!validate.success) {
+    return { errors: validate.error.flatten().fieldErrors };
+  }
 
   const existingUsername = await prisma.user.findUnique({
     where: {
@@ -52,25 +54,45 @@ export const updateProfile = async (
   let backdrop_image_url;
 
   try {
-    if (profileImg instanceof File) {
-      if (user?.image)
-        await deleteObject(ref(storage, `users/${userId}/avatar_image`));
+    if (profileImg) {
+      const fileRef = ref(storage, `users/${userId}/avatar_image`);
+      let isImage = false;
 
-      const storageRef = ref(storage, `users/${userId}/avatar_image`);
-      await uploadBytes(storageRef, profileImg);
-      avatar_image_url = await getDownloadURL(storageRef);
+      try {
+        const metadata = await getMetadata(fileRef);
+        isImage = true;
+      } catch (error) {
+        isImage = false;
+      }
+      if (isImage) await deleteObject(fileRef);
+
+      const file = new Blob([profileImg], {
+        type: (profileImg as any).type || "image/jpeg",
+      });
+      await uploadBytes(fileRef, file);
+      avatar_image_url = await getDownloadURL(fileRef);
     }
   } catch (error) {
     throw new Error("Profile photo upload failed");
   }
   try {
-    if (backdropImg instanceof File) {
-      if (user?.backdrop_image)
-        await deleteObject(ref(storage, `users/${userId}/backdrop_image`));
+    if (backdropImg) {
+      const fileRef = ref(storage, `users/${userId}/backdrop_image`);
+      let isImage = false;
 
-      const storageRef = ref(storage, `users/${userId}/backdrop_image`);
-      await uploadBytes(storageRef, backdropImg);
-      backdrop_image_url = await getDownloadURL(storageRef);
+      try {
+        const metadata = await getMetadata(fileRef);
+        isImage = true;
+      } catch (error) {
+        isImage = false;
+      }
+      if (isImage) await deleteObject(fileRef);
+
+      const file = new Blob([backdropImg], {
+        type: (backdropImg as any).type || "image/jpeg",
+      });
+      await uploadBytes(fileRef, file);
+      backdrop_image_url = await getDownloadURL(fileRef);
     }
   } catch (error) {
     throw new Error("Backdrop photo upload failed");
