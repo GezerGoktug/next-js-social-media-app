@@ -14,8 +14,9 @@ type registerDataType = {
 
 const register = async (data: registerDataType) => {
   const validate = registerSchema.safeParse(data);
-  if (!validate.success)
-    throw new Error(validate.error.flatten().fieldErrors as string);
+  if (!validate.success) {
+    return { success: false, errors: validate.error.flatten().fieldErrors };
+  }
 
   const { email, password, fullname } = data;
   const exitingEmailUser = await prisma.user.findUnique({

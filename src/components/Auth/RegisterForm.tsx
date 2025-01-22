@@ -38,7 +38,17 @@ const RegisterForm = () => {
 
   const onSubmit = async (data: z.infer<typeof registerSchema>) => {
     try {
-      await register(data);
+      const res = await register(data);
+      if (!res?.success && res) {
+        toast({
+          variant: "destructive",
+          title: "Validation Error",
+          description: Object.entries(res.errors)
+            .map(([field, messages]) => `${field}: ${messages?.join(", ")}`)
+            .join("\n"),
+        });
+        return;
+      }
       const callback = await signIn("credentials", {
         email: data.email,
         password: data.password,

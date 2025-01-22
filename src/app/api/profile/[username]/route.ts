@@ -35,6 +35,9 @@ export async function GET(
         },
       },
     });
+    if (user === null) {
+      return NextResponse.json({message:"User not found"}, { status: 404 });
+    }
 
     return NextResponse.json(user, { status: 200 });
   } catch (error) {

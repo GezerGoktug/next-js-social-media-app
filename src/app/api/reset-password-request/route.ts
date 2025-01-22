@@ -17,7 +17,7 @@ export async function POST(req: Request) {
   if (!exitingUser)
     return NextResponse.json(
       { message: "No such user found" },
-      { status: 500 }
+      { status: 404 }
     );
 
   const resetToken = uuidv7();

@@ -1,3 +1,5 @@
+import { ApiError } from "@/error/ApiError";
+
 type HttpMethod = "GET" | "POST" | "DELETE" | "PUT" | "PATCH";
 
 interface ApiResponse<T> {
@@ -37,7 +39,10 @@ const fetching = async <T>(
 
     if (!res.ok) {
       const errorRes = await res.json();
-      throw new Error(errorRes.message || "Veri alınırken bir hata oluştu");
+      throw new ApiError(
+        errorRes.message || "Veri alınırken bir hata oluştu",
+        res.status
+      );
     }
 
     const jsonData: T = await res.json();
@@ -45,7 +50,7 @@ const fetching = async <T>(
   } catch (error: any) {
     return {
       error: error.message || "Bir hata oluştu",
-      status: error.status || 500,
+      status: error.code || 500,
     };
   }
 };

@@ -18,14 +18,14 @@ export async function POST(req: Request) {
   if (!user) {
     return NextResponse.json(
       { message: "Invalid or expired token" },
-      { status: 500 }
+      { status: 400 }
     );
   }
 
   const validated = passwordSchema.safeParse({ password });
 
   if (!validated.success) {
-    return NextResponse.json({ message: "Invalid password" }, { status: 500 });
+    return NextResponse.json({ message: "Invalid password" }, { status: 400 });
   }
 
   const hashedPassword = await bcrypt.hash(password, 10);
@@ -39,7 +39,7 @@ export async function POST(req: Request) {
   if (exitingPasswordUser)
     return NextResponse.json(
       { message: "Password is already used" },
-      { status: 500 }
+      { status: 400 }
     );
 
   try {

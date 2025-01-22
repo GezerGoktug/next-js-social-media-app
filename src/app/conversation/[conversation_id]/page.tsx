@@ -6,6 +6,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import EmojiPicker from "@/components/ui/common/EmojiPicker";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { Skeleton } from "@/components/ui/skeleton";
 import { useToast } from "@/hooks/use-toast";
 import api from "@/lib/api";
 import { useSocket } from "@/Providers/SocketProvider";
@@ -17,7 +18,9 @@ import {
 } from "@/types/types";
 import {
   ArrowLeft,
+  House,
   LucideImage,
+  MailX,
   Send,
   SmilePlus,
   SquarePlay,
@@ -35,7 +38,7 @@ type ParamsType = {
 
 const MobileChat = ({ params }: { params: ParamsType }) => {
   const { toast } = useToast();
-  const t = useTranslations("conversations_page.chat_section")
+  const t = useTranslations("conversations_page.chat_section");
   const conversationId = params.conversation_id;
   const [content, setContent] = useState<string>("");
   const [media, setMedia] = useState<MediaType | null>(null);
@@ -43,6 +46,7 @@ const MobileChat = ({ params }: { params: ParamsType }) => {
   const [isPickerVisible, setIsPickerVisible] = useState<boolean>(false);
   const [messages, setMessages] = useState<MessageType[]>([]);
   const [chatPersonUser, setChatPersonUser] = useState<ChatPersonType>();
+  const [loading, setLoading] = useState<boolean>(true);
   const { socket } = useSocket();
   useEffect(() => {
     const fetchMessages = async () => {
@@ -62,14 +66,18 @@ const MobileChat = ({ params }: { params: ParamsType }) => {
       const res = await api.get<ChatPersonType>(
         `/conversations/user?conversationId=${conversationId}`
       );
+
       if (res.data) {
         setChatPersonUser(res.data);
       }
     };
     if (conversationId) {
-      fetchUser().then(() => {
-        fetchMessages();
-      });
+      setLoading(true);
+      fetchUser()
+        .then(() => {
+          fetchMessages();
+        })
+        .finally(() => setLoading(false));
     }
   }, [conversationId]);
 
@@ -78,8 +86,6 @@ const MobileChat = ({ params }: { params: ParamsType }) => {
       socket?.emit("joinConversation", conversationId);
 
       socket?.on("message", (msg) => {
-        console.log(msg);
-
         setMessages((prev) => [...prev, msg]);
       });
     }
@@ -142,114 +148,155 @@ const MobileChat = ({ params }: { params: ParamsType }) => {
   };
 
   return (
-    <div className="bg-card  relative ">
-      <div className="sticky position-top border-b border-input rounded-t-lg backdrop-blur-lg z-30">
-        <div className="row-center gap-4 px-6 py-4">
-          <Link href="/conversation">
-            <ArrowLeft className="inline lg:hidden" />
-          </Link>
-          <Avatar className="outline outline-2 outline-secondary outline-offset-2 size-10">
-            <AvatarImage src={chatPersonUser?.image || ""} alt="" />
-            <AvatarFallback>CN</AvatarFallback>
-          </Avatar>
-          <h4 className="font-semibold ">{chatPersonUser?.name}</h4>
-        </div>
-      </div>
-      <ScrollArea className="h-[calc(100vh-72px)] pb-20">
-        <div className="flex flex-col gap-2 mt-3 px-4  w-screen">
-          {messages.map((msg) => (
-            <Message key={msg.id} message={msg} />
-          ))}
-        </div>
-      </ScrollArea>
-      {preview && (
-        <div className="absolute  bottom-20 p-2  left-2 backdrop-blur-lg bg-gray-900/50 rounded-lg  border border-input z-50">
-          <X
-            className="absolute right-4 top-4 bg-primary size-10 p-2 rounded-full cursor-pointer z-20"
-            onClick={resetMedia}
-          />
-          {preview?.type === "VIDEO" ? (
-            <div className="p-0 relative w-72 h-48">
-              <ReactPlayer
-                controls
-                width="100%"
-                height="100%"
-                style={{ objectFit: "cover" }}
-                url={preview.url}
-              />
+    <>
+      {loading ? (
+        <div>
+          <Skeleton className="sticky  position-top p-4 rounded-none ">
+            <div className="row-center gap-4 ">
+              <Skeleton className="size-10 rounded-full bg-slate-600" />
+              <Skeleton className="w-24 h-4 bg-slate-600" />
             </div>
-          ) : (
-            preview?.url && (
-              <div className="p-4 relative w-72 h-56">
-                <Image
-                  fill
-                  priority
-                  alt=""
-                  className="object-cover rounded-lg"
-                  src={preview?.url}
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 100vw, 100vw"
-                />
-              </div>
-            )
-          )}
-        </div>
-      )}
-      <form
-        onSubmit={onSubmit}
-        className="fixed position-bottom flex  gap-3 xs:gap-5 py-4 bg-card rounded-b-lg mx-2 xs:px-3 border-t"
-      >
-        <div className="flex gap-3">
-          <label className="relative" htmlFor="imageChange">
-            <LucideImage className="cursor-pointer size-5 xs:size-6" />
-            <input
-              id="imageChange"
-              type="file"
-              className="hidden "
-              accept="image/*"
-              onChange={(e) => handleFileChange(e, "IMAGE")}
-            />
-          </label>
-          <label htmlFor="videoChange" className="relative">
-            <SquarePlay className="cursor-pointer size-5 xs:size-6" />
-            <input
-              id="videoChange"
-              type="file"
-              className="hidden "
-              accept="video/*"
-              onChange={(e) => handleFileChange(e, "VIDEO")}
-            />
-          </label>
-          <div className="relative">
-            <SmilePlus
-              className="cursor-pointer size-5 xs:size-6"
-              onClick={() => setIsPickerVisible(true)}
-            />
-            {isPickerVisible && (
-              <EmojiPicker
-                className="!-top-[480px]"
-                setContent={setContent}
-                setIsPickerVisible={setIsPickerVisible}
-              />
-            )}
+          </Skeleton>
+          <div className="h-[calc(100vh-72px)] pb-20">
+            <div className="flex flex-col gap-2 mt-3 px-4  w-screen">
+              <Skeleton className="bg-muted h-12 w-2/3" />
+              <Skeleton className="bg-primary h-12 w-2/3 ms-auto" />
+              <Skeleton className="bg-primary h-24 w-2/3 ms-auto" />
+              <Skeleton className="bg-muted h-12 w-2/3" />
+              <Skeleton className="bg-muted h-24 w-2/3" />
+              <Skeleton className="bg-primary h-12 w-2/3 ms-auto" />
+              <Skeleton className="bg-primary h-12 w-2/3 ms-auto" />
+              <Skeleton className="bg-muted h-12 w-2/3" />
+            </div>
           </div>
         </div>
-        <AutosizeTextarea
-          onChange={(e) => setContent(e.target.value)}
-          value={content}
-          minHeight={26}
-          maxHeight={130}
-          placeholder={t("input_placeholder")}
-          className="bg-transparent border-none flex-1    focus-visible:ring-offset-0 focus-visible:ring-0 resize-none p-0"
-        />
-        <Button
-          type="submit"
-          className="size-8 p-2 xs:p-0 xs:size-10"
-          size="icon"
-        >
-          <Send />
-        </Button>
-      </form>
-    </div>
+      ) : chatPersonUser ? (
+        <div className="bg-card  relative ">
+          <div className="sticky position-top border-b border-input rounded-t-lg backdrop-blur-lg z-30">
+            <div className="row-center gap-4 px-6 py-4">
+              <Link href="/conversation">
+                <ArrowLeft className="inline lg:hidden" />
+              </Link>
+              <Avatar className="outline outline-2 outline-secondary outline-offset-2 size-10">
+                <AvatarImage src={chatPersonUser?.image || ""} alt="" />
+                <AvatarFallback>CN</AvatarFallback>
+              </Avatar>
+              <h4 className="font-semibold ">{chatPersonUser?.name}</h4>
+            </div>
+          </div>
+          <ScrollArea className="h-[calc(100vh-72px)] pb-20">
+            <div className="flex flex-col gap-2 mt-3 px-4  w-screen">
+              {messages.map((msg) => (
+                <Message key={msg.id} message={msg} />
+              ))}
+            </div>
+          </ScrollArea>
+          {preview && (
+            <div className="absolute  bottom-20 p-2  left-2 backdrop-blur-lg bg-gray-900/50 rounded-lg  border border-input z-50">
+              <X
+                className="absolute right-4 top-4 bg-primary size-10 p-2 rounded-full cursor-pointer z-20"
+                onClick={resetMedia}
+              />
+              {preview?.type === "VIDEO" ? (
+                <div className="p-0 relative w-72 h-48">
+                  <ReactPlayer
+                    controls
+                    width="100%"
+                    height="100%"
+                    style={{ objectFit: "cover" }}
+                    url={preview.url}
+                  />
+                </div>
+              ) : (
+                preview?.url && (
+                  <div className="p-4 relative w-72 h-56">
+                    <Image
+                      fill
+                      priority
+                      alt=""
+                      className="object-cover rounded-lg"
+                      src={preview?.url}
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 100vw, 100vw"
+                    />
+                  </div>
+                )
+              )}
+            </div>
+          )}
+          <form
+            onSubmit={onSubmit}
+            className="fixed position-bottom flex  gap-3 xs:gap-5 py-4 bg-card rounded-b-lg mx-2 xs:px-3 border-t"
+          >
+            <div className="flex gap-3">
+              <label className="relative" htmlFor="imageChange">
+                <LucideImage className="cursor-pointer size-5 xs:size-6" />
+                <input
+                  id="imageChange"
+                  type="file"
+                  className="hidden "
+                  accept="image/*"
+                  onChange={(e) => handleFileChange(e, "IMAGE")}
+                />
+              </label>
+              <label htmlFor="videoChange" className="relative">
+                <SquarePlay className="cursor-pointer size-5 xs:size-6" />
+                <input
+                  id="videoChange"
+                  type="file"
+                  className="hidden "
+                  accept="video/*"
+                  onChange={(e) => handleFileChange(e, "VIDEO")}
+                />
+              </label>
+              <div className="relative">
+                <SmilePlus
+                  className="cursor-pointer size-5 xs:size-6"
+                  onClick={() => setIsPickerVisible(true)}
+                />
+                {isPickerVisible && (
+                  <EmojiPicker
+                    className="!-top-[480px]"
+                    setContent={setContent}
+                    setIsPickerVisible={setIsPickerVisible}
+                  />
+                )}
+              </div>
+            </div>
+            <AutosizeTextarea
+              onChange={(e) => setContent(e.target.value)}
+              value={content}
+              minHeight={26}
+              maxHeight={130}
+              placeholder={t("input_placeholder")}
+              className="bg-transparent border-none flex-1    focus-visible:ring-offset-0 focus-visible:ring-0 resize-none p-0"
+            />
+            <Button
+              type="submit"
+              className="size-8 p-2 xs:p-0 xs:size-10"
+              size="icon"
+            >
+              <Send />
+            </Button>
+          </form>
+        </div>
+      ) : (
+        <div className="flex-center h-screen">
+          <div className="col-center">
+            <MailX className="size-28" />
+            <h6 className="font-semibold text-center text-3xl my-5">
+              {t("conversation_not_found_header")}
+            </h6>
+            <p>{t("conversation_not_found_desc")}</p>
+            <Link href="/">
+              <Button className="gap-2 mt-4">
+                <House />
+                {t("home_btn_text")}
+              </Button>
+            </Link>
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 

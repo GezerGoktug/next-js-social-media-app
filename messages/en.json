@@ -74,7 +74,10 @@
         "profile_posts_tab_text_1": "Posts",
         "profile_posts_tab_text_2": "Likes",
         "profile_posts_tab_text_3": "Reposts",
-        "profile_posts_tab_text_4": "Commented"
+        "profile_posts_tab_text_4": "Commented",
+        "user_not_found_header": "User not found",
+        "user_not_found_desc": "Try searching for another one.",
+        "home_btn_text":"Home"
     },
     "post_detail_page": {
         "title": "Post",
@@ -98,6 +101,8 @@
         "not_selected_chat_header_text": "Select a person",
         "not_selected_chat_text": "Select anyone you want from the contact list and start talking, or you can start chatting with someone new.",
         "delete_conversation_text": "Delete",
+        "conversation_not_found_header": "Conversation not found",
+        "conversation_not_found_desc": "Try searching for another one.",
         "create_conversation_modal": {
             "header": "Create new conversation",
             "input_placeholder": "Enter a username or fullname",
@@ -110,7 +115,10 @@
             "create_message_tooltip_1": "Upload Image",
             "create_message_tooltip_2": "Upload Video",
             "create_message_tooltip_3": "Add Emoji",
-            "input_placeholder": "Enter a message"
+            "input_placeholder": "Enter a message",
+            "conversation_not_found_header": "Conversation not found",
+            "conversation_not_found_desc": "Try searching for another one.",
+            "home_btn_text":"Home"
         }
     },
     "settings_page": {
@@ -280,7 +288,7 @@
                 "search_user_tooltip_2": "Cancel following",
                 "search_user_tooltip_3": "Follow Request Cancel",
                 "search_user_tooltip_4": "Follow {name}",
-                "cancel_button": "İptal"
+                "cancel_button": "Cancel"
             },
             "notification_section": {
                 "tooltip": "Notifications",

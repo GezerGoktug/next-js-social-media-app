@@ -28,7 +28,7 @@ export async function GET(req: NextRequest) {
         },
       },
     });
-    if (!conversationUsers) return NextResponse.json([], { status: 200 });
+    if (!conversationUsers) return NextResponse.json({message:"Conversation user not found"}, { status: 404 });
 
     const otherUsers = conversationUsers.users.filter(
       (u) => u.user.id !== userId
@@ -38,6 +38,6 @@ export async function GET(req: NextRequest) {
     if (error instanceof UnauthorizedError) {
       return NextResponse.json({ message: error.message }, { status: 401 });
     }
-    return NextResponse.json({ message: "User not founded." }, { status: 500 });
+    return NextResponse.json({ message: "Could not get conversation user" }, { status: 500 });
   }
 }

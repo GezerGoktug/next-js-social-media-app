@@ -76,7 +76,10 @@
         "profile_posts_tab_text_1": "Gönderiler",
         "profile_posts_tab_text_2": "Beğeniler",
         "profile_posts_tab_text_3": "Yeniden Paylaşılanlar",
-        "profile_posts_tab_text_4": "Yorum Yapılanlar"
+        "profile_posts_tab_text_4": "Yorum Yapılanlar",
+        "user_not_found_header": "Kullanıcı bulunamadı",
+        "user_not_found_desc": "Başka bir şey aramayı deneyin.",
+        "home_btn_text":"Ana sayfa"
     },
     "post_detail_page": {
         "title": "Gönderi",
@@ -100,6 +103,8 @@
         "not_selected_chat_header_text": "Bir kişi seçin",
         "not_selected_chat_text": "Kişi listesinden istediğiniz kişiyi seçip konuşmaya başlayın veya yeni biriyle sohbet etmeye başlayabilirsiniz.",
         "delete_conversation_text": "Sil",
+        "conversation_not_found_header": "Sohbet bulunamadı",
+        "conversation_not_found_desc": "Başka bir şey aramayı deneyin.",
         "create_conversation_modal": {
             "header": "Yeni sohbet başlat",
             "input_placeholder": "Bir kullanıcı adı veya tam ad girin",
@@ -112,7 +117,10 @@
             "create_message_tooltip_1": "Resim yükle",
             "create_message_tooltip_2": "Video yükle",
             "create_message_tooltip_3": "Emoji ekle",
-            "input_placeholder": "Bir mesaj girin"
+            "input_placeholder": "Bir mesaj girin",
+            "conversation_not_found_header": "Sohbet bulunamadı",
+            "conversation_not_found_desc": "Başka bir şey aramayı deneyin.",
+            "home_btn_text":"Ana sayfa"
         }
     },
     "settings_page": {

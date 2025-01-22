@@ -73,6 +73,16 @@ const UpdateProfileClient = ({ currentUser }: { currentUser: UserType }) => {
 
     try {
       const res = await updateProfile(otherUserDatas, fileData);
+      if (res.errors) {
+        toast({
+          variant: "destructive",
+          title: "Validation Error ",
+          description: Object.entries(res.errors)
+            .map(([field, messages]) => `${field}: ${messages?.join(", ")}`)
+            .join("\n"),
+        });
+        return;
+      }
       if (res) {
         toast({
           variant: "default",
@@ -148,7 +158,7 @@ const UpdateProfileClient = ({ currentUser }: { currentUser: UserType }) => {
             <Image
               fill
               priority
-              src={backdropImgUrl}
+              src={backdropImgUrl ?? "/defaultbackdrop.png"}
               className="object-cover bg-slate-800 sm:rounded-t-lg"
               sizes="(max-width: 640px) 100vw, (max-width: 1024px) 100vw, 100vw"
               alt="Backdrop Image"
@@ -164,7 +174,7 @@ const UpdateProfileClient = ({ currentUser }: { currentUser: UserType }) => {
             <label className="cursor-pointer [&_.download-icon]:hover:opacity-100">
               <Avatar className="bg-white  relative z-20 -mt-12 xs:-mt-16 ms-4 xs:ms-6 dark:bg-card p-1 rounded-full size-24 xs:size-36">
                 <AvatarImage
-                  src={profileImgUrl}
+                  src={profileImgUrl ?? "/defaultprofile.png"}
                   className="!object-cover rounded-full"
                   alt="Profile Image"
                 />

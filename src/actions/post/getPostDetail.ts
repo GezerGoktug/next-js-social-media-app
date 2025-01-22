@@ -3,7 +3,7 @@ import prisma from "@/lib/prisma";
 import { getUserId } from "../util/getUserInfos";
 import { PostDetailType } from "@/types/types";
 
-const getPostDetail = async (id: string): Promise<PostDetailType> => {
+const getPostDetail = async (id: string): Promise<PostDetailType | null> => {
   const userId = await getUserId();
   try {
     const post = await prisma.post.findUnique({
@@ -71,6 +71,8 @@ const getPostDetail = async (id: string): Promise<PostDetailType> => {
         },
       },
     });
+    if (!post) return null;
+
     const isLiked = await prisma.like.findFirst({
       where: {
         postId: post?.id,
@@ -92,11 +94,9 @@ const getPostDetail = async (id: string): Promise<PostDetailType> => {
       },
     });
 
-    if (!post) throw new Error("Post not found");
-
     return {
       ...post,
-      isMyPost : post.userId === userId,
+      isMyPost: post.userId === userId,
       isLiked: !!isLiked,
       isReposted: !!isReposted,
       isSaved: !!isSaved,

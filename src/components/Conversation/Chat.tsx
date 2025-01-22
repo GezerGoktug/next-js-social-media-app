@@ -8,6 +8,7 @@ import {
   ArrowLeft,
   Inbox,
   LucideImage,
+  MailX,
   Send,
   SmilePlus,
   SquarePlay,
@@ -93,7 +94,6 @@ const Chat = () => {
       socket?.emit("joinConversation", conversationId);
 
       socket?.on("message", (msg) => {
-
         setMessages((prev) => [...prev, msg]);
       });
     }
@@ -172,6 +172,16 @@ const Chat = () => {
           </h6>
           <p className="text-center text-muted-foreground">
             {t("not_selected_chat_text")}
+          </p>
+        </div>
+      ) : !chatPersonUser ? (
+        <div className="size-full col-center p-24 place-content-center">
+          <MailX className="size-28" />
+          <h6 className="font-semibold text-4xl my-3">
+            {t("conversation_not_found_header")}
+          </h6>
+          <p className="text-center text-muted-foreground">
+            {t("conversation_not_found_desc")}
           </p>
         </div>
       ) : (

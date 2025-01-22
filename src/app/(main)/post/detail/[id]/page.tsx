@@ -2,11 +2,13 @@ import getPostDetail from "@/actions/post/getPostDetail";
 import Comments from "@/components/PostDetail/Comments";
 import CreateComment from "@/components/PostDetail/CreateComment";
 import PostDetailContent from "@/components/PostDetail/PostDetailContent";
+import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Ban, House } from "lucide-react";
 import { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
+import Error from "next/error";
 import Link from "next/link";
 
 export async function generateMetadata({
@@ -15,6 +17,13 @@ export async function generateMetadata({
   params: { id: string };
 }): Promise<Metadata> {
   const postDetail = await getPostDetail(params.id);
+
+  if (postDetail === null) {
+    return {
+      title: "Post Detail - Connectify",
+      description: "Post Detail",
+    };
+  }
 
   const contentPreview = postDetail.content
     ? postDetail.content.length > 60
@@ -51,8 +60,24 @@ export async function generateMetadata({
 }
 
 const PostDetail = async ({ params }: { params: { id: string } }) => {
-  const { comments, ...postDetail } = await getPostDetail(params.id);
+  const post = await getPostDetail(params.id);
 
+  if (post === null) {
+    return (
+      <div className="col-center mt-8">
+        <Ban className="size-28" />
+        <h6 className="font-semibold text-4xl my-5">Post not found</h6>
+        <p>Try searching for another one.</p>
+        <Link href="/">
+          <Button className="gap-2 mt-4">
+            <House />
+            Home
+          </Button>
+        </Link>
+      </div>
+    );
+  }
+  const { comments, ...postDetail } = post;
   const t = await getTranslations("post_detail_page");
 
   return (
