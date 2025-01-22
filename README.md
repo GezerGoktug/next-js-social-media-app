@@ -52,6 +52,9 @@ This project is a social media platform developed using modern web technologies.
 - **NextAuth**: Authentication and session management.
 - **Socket.IO**: Real-time communication for live messaging and notifications.
 
+### 🌐 **Devops:**
+- **Docker** : For application containerization
+
 ### 📋 **Other Tools:**
 - **Hugging Face Inference API**: Machine learning model for post categorization.
 - **Next Intl**: Multilingual support.
@@ -59,6 +62,8 @@ This project is a social media platform developed using modern web technologies.
 - **TypeScript**: For type safety and development experience.
 - **uuid**: To create a unique id.
 - **day.js**: For date and time based transactions.
+
+
 
 ### Desktop View
 
