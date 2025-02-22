@@ -190,7 +190,7 @@ NEXT_PUBLIC_DEFAULT_BACKDROP_URL=https://example.com/default-backdrop.png
 6.**Sync the database using Prisma:**
 
 ```
-npx prisma migrate dev
+npx prisma migrate dev --name init
 ```
 
 7.**Start the application**
