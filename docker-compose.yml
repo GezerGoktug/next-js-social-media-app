@@ -8,6 +8,7 @@ services:
       container_name: next-js-ui
       ports:
         - "3000:3000"  
+        - "3001:3001"
       restart: always  
       stdin_open: true
       tty: true
