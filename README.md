@@ -52,6 +52,9 @@ This project is a social media platform developed using modern web technologies.
 - **NextAuth**: Authentication and session management.
 - **Socket.IO**: Real-time communication for live messaging and notifications.
 
+### 🌐 **Devops:**
+- **Docker** : For application containerization
+
 ### 📋 **Other Tools:**
 - **Hugging Face Inference API**: Machine learning model for post categorization.
 - **Next Intl**: Multilingual support.
@@ -59,6 +62,8 @@ This project is a social media platform developed using modern web technologies.
 - **TypeScript**: For type safety and development experience.
 - **uuid**: To create a unique id.
 - **day.js**: For date and time based transactions.
+
+
 
 ### Desktop View
 
@@ -185,7 +190,7 @@ NEXT_PUBLIC_DEFAULT_BACKDROP_URL=https://example.com/default-backdrop.png
 6.**Sync the database using Prisma:**
 
 ```
-npx prisma migrate dev
+npx prisma migrate dev --name init
 ```
 
 7.**Start the application**
@@ -197,6 +202,50 @@ npm run dev
 8.**Show in browser**
 
 Go to `http://localhost:3000` in your browser.
+
+## 🔧 **Setup with Docker**
+
+**NOTE**: For this process, Docker must be installed on your computer.
+
+1.**Add 3 new values ​​to the .env file**
+
+```
+POSTGRES_DB = <POSTGRES_DB_NAME>
+POSTGRES_USER = <POSTGRES_DB_USERNAME>
+POSTGRES_PASSWORD = <POSTGRES_DB_PASSWORD>
+```
+2.**Update the schema file in the prisma folder**
+
+```
+datasource db {
+  ....
+  url       = env("DATABASE_URL")
+}
+```
+3.**Add postgres link url to .env file**
+
+```
+# Note : The default value of postgres db schema is public
+# Note : You can put vercel postgres database env variables in the comment line
+DATABASE_URL = "postgresql://<POSTGRES_DB_USERNAME>:<POSTGRES_DB_PASSWORD>@<POSTGRES_DB_HOST>:5430/<POSTGRES_DB_NAME>?schema=<POSTGRES_DB_SCHEMA>"
+```
+
+4.**Run docker command**
+
+```
+docker compose up -d  
+```
+
+5.**Run the command in the terminal to reflect the tables in our prisma schema to the docker postgres database**
+```
+npx prisma migrate dev --name init
+```
+
+6.**Show in browser**
+
+Go to `http://localhost:3000` in your browser.
+
+
 
 ## Contribute 🤝
 
