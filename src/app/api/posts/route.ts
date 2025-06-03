@@ -6,7 +6,7 @@ import { UnauthorizedError } from "@/error/UnauthorizedError";
 
 export async function GET(req: NextRequest) {
   let page = req.nextUrl.searchParams.get("page") as string;
-  
+
   try {
     const userId = await getUserId();
     const followedUsersPosts = await prisma.post.findMany({
@@ -196,7 +196,14 @@ export async function GET(req: NextRequest) {
     ];
 
     const editedPosts = await applyPostInteractions(combinedPosts);
-    return NextResponse.json(editedPosts, { status: 200 });
+
+    return NextResponse.json(
+      {
+        posts: editedPosts,
+        hasMore: editedPosts.length > 0,
+      },
+      { status: 200 }
+    );
   } catch (error) {
     if (error instanceof UnauthorizedError) {
       return NextResponse.json({ message: error.message }, { status: 401 });

@@ -49,7 +49,7 @@ const completeProfile = async (
     throw new Error("Profile photo upload failed");
   }
   try {
-    const mediaFile = fileData.get("backdropImg") as File | null;
+    const mediaFile = fileData.get("backdropImg");
     if (mediaFile) {
       const backdropImg = new Blob([mediaFile], {
         type: (mediaFile as any).type || "image/jpeg",

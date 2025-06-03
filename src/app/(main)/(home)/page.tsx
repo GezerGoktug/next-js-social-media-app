@@ -12,8 +12,13 @@ export const metadata: Metadata = {
     "Welcome to Connectify, where your social journey begins! Discover personalized content, stay connected with your community, and make every moment count. Your hub for connection, interaction, and inspiration.",
 };
 
+interface IGetPostsResponse {
+  posts: PostType[];
+  hasMore: boolean;
+}
+
 const Home = async () => {
-  const res = await api.get<PostType[]>("/posts?page=1", {
+  const res = await api.get<IGetPostsResponse>("/posts?page=1", {
     header: Object.fromEntries(headers().entries()),
     cache: "no-store",
   });
@@ -24,7 +29,12 @@ const Home = async () => {
       <RefreshButton />
 
       <section className="mb-24 flex flex-col gap-3 ">
-        {res.data && <Posts initialPosts={res.data} />}
+        {res.data && (
+          <Posts
+            initialHasMore={res.data.hasMore}
+            initialPosts={res.data.posts}
+          />
+        )}
       </section>
     </>
   );
