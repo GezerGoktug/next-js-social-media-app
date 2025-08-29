@@ -12,10 +12,9 @@ const handleLikeToPost = async (
   try {
     const userId = await getUserId();
     if (statusToLike) {
-      await prisma.like.deleteMany({
+      await prisma.like.delete({
         where: {
-          userId: userId as string,
-          postId: postId,
+          userId_postId: { userId: userId as string, postId },
         },
       });
       return await handleNotify(postId, sendingUserId, "DELETE", "LIKE");

@@ -15,6 +15,9 @@ const deleteUser = async () => {
           },
         },
       },
+      select: {
+        id: true
+      }
     });
 
     await prisma.conversation.deleteMany({

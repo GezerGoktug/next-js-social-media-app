@@ -2,8 +2,6 @@ import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 import { controlSession, getUserId } from "@/actions/util/getUserInfos";
 import { UnauthorizedError } from "@/error/UnauthorizedError";
-import { deleteObject, listAll, ref } from "firebase/storage";
-import { storage } from "@/lib/firebase";
 import deleteFolder from "@/lib/deleteFolder";
 
 export async function GET() {

@@ -7,10 +7,9 @@ const handleSavedToPost = async (postId: string, statusToSaved: boolean) => {
   try {
     const userId = await getUserId();
     if (statusToSaved) {
-      await prisma.saved.deleteMany({
+      await prisma.saved.delete({
         where: {
-          userId: userId as string,
-          postId: postId,
+          userId_postId: { userId: userId as string, postId },
         },
       });
     } else {

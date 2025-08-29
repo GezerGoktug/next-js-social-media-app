@@ -21,54 +21,38 @@ export async function GET(req: NextRequest) {
       );
     }
 
-    const userConversations = await prisma.conversation.findMany({
-      where: {
-        users: {
-          some: {
-            user: {
-              id: userId,
-            },
-          },
-        },
-      },
-      select: {
-        users: {
-          select: {
-            user: {
-              select: {
-                id: true,
-              },
-            },
-          },
-        },
-      },
-    });
-
-    const conversationUserIds = userConversations.flatMap((conv) =>
-      conv.users.map((u) => u.user.id)
-    );
     const users = await prisma.user.findMany({
       where: {
-        AND: [
-          {
-            OR: [
-              { username: { contains: searchQuery, mode: "insensitive" } },
-              { name: { contains: searchQuery, mode: "insensitive" } },
-            ],
-          },
-          {
-            id: {
-              notIn: conversationUserIds,
-              not: userId,
-            },
-          },
+        OR: [
+          { username: { contains: searchQuery, mode: "insensitive" } },
+          { name: { contains: searchQuery, mode: "insensitive" } },
         ],
+        NOT: {
+          OR: [
+            {
+              conversations: {
+                some: {
+                  conversation: {
+                    users: {
+                      some: {
+                        userId
+                      }
+                    }
+                  }
+                },
+              },
+            },
+            {
+              id: userId
+            }
+          ]
+        },
       },
       select: {
         id: true,
         name: true,
         username: true,
-        image: true,
+        image: true
       },
     });
 

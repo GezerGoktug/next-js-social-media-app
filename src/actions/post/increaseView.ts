@@ -6,14 +6,13 @@ import { getUserId } from "../util/getUserInfos";
 const increaseView = async (postId: string) => {
   const userId = await getUserId();
 
-  const existPostView = await prisma.view.findMany({
+  const existPostView = await prisma.view.findUnique({
     where: {
-      userId: userId,
-      postId: postId,
+      userId_postId: { userId: userId as string, postId },
     },
   });
 
-  if (existPostView.length !== 0) return;
+  if (existPostView) return;
 
   try {
     await prisma.view.create({

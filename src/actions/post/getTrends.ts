@@ -1,29 +1,29 @@
-"use server";
-
 import prisma from "@/lib/prisma";
 
-const getTrends = async (extended?: boolean) => {
-  const posts = await prisma.post.findMany({
-    select: { content: true },
-  });
-
-  const tagCounts: Record<string, number> = {};
-
-  posts.forEach((post) => {
-    const tags = post.content?.match(/#\w+/g);
-    if (tags) {
-      tags.forEach((tag) => {
-        tagCounts[tag] = (tagCounts[tag] || 0) + 1;
-      });
-    }
-  });
-
-  const topTags = Object.entries(tagCounts)
-    .sort(([, aCount], [, bCount]) => bCount - aCount)
-    .slice(0, extended ? 10 : 5)
-    .map(([tag, count]) => ({ tag, count }));
-
-  return topTags;
+type Trend = {
+  tag: string;
+  count: number;
 };
 
-export default getTrends;
+const getTrendsRaw = async (extended?: boolean): Promise<Trend[]> => {
+  const limit = extended ? 10 : 5;
+
+  const trends = await prisma.$queryRaw<Trend[]>`
+    SELECT hashtags.tag AS tag, COUNT(*) AS count
+    FROM (
+      SELECT unnest(regexp_matches(content,'#[A-Za-z0-9_ğüşöçıİĞÜŞÖÇ]+', 'g')) AS tag
+      FROM "Post"
+      WHERE content IS NOT NULL
+    ) AS hashtags
+    GROUP BY hashtags.tag
+    ORDER BY count DESC
+    LIMIT ${limit};
+  `;
+
+  return trends.map(t => ({
+    tag: t.tag,
+    count: Number(t.count),
+  }));
+};
+
+export default getTrendsRaw;

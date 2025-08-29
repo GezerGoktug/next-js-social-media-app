@@ -59,10 +59,9 @@ export const evaluationOfFriendRequest = async (
         },
       });
     }
-    await prisma.friendRequest.deleteMany({
+    await prisma.friendRequest.delete({
       where: {
-        senderId: id,
-        receiverId: userId,
+        senderId_receiverId: { senderId: id, receiverId: userId as string},
       },
     });
   } catch (error) {

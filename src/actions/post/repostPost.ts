@@ -12,10 +12,9 @@ const handleRepostToPost = async (
   try {
     const userId = await getUserId();
     if (statusToRepost) {
-      await prisma.repost.deleteMany({
+      await prisma.repost.delete({
         where: {
-          userId: userId as string,
-          postId: postId,
+          userId_postId: { userId: userId as string, postId },
         },
       });
       return await handleNotify(postId, sendingUserId, "DELETE", "REPOST");

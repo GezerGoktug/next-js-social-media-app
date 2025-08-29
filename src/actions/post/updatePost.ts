@@ -68,44 +68,40 @@ const updatePost = async (formData: FormData) => {
     throw new Error("Post media could not be upload failed");
   }
   let categories: string[] = [];
-  /**
-   * !
-   * ! Post categorization has been temporarily disabled on Hugging Face due to model request issues.
-   * !
-   */
-  // try {
-  //   const response = await fetch(process.env.HUGGING_FACE_API_URL as string, {
-  //     method: "POST",
-  //     headers: {
-  //       Authorization: `Bearer ${process.env.HUGGING_FACE_API_TOKEN}`,
-  //     },
-  //     body: JSON.stringify({
-  //       inputs: content,
-  //       parameters: {
-  //         candidate_labels: [
-  //           "business",
-  //           "technology",
-  //           "sports",
-  //           "news",
-  //           "politics",
-  //           "entertainment",
-  //           "science",
-  //           "other",
-  //         ],
-  //       },
-  //     }),
-  //   });
-  //   const { labels, scores } = await response.json();
+  try {
+    const response = await fetch(process.env.HUGGING_FACE_API_URL as string, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${process.env.HUGGING_FACE_API_TOKEN}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        inputs: content,
+        parameters: {
+          candidate_labels: [
+            "business",
+            "technology",
+            "sports",
+            "news",
+            "politics",
+            "entertainment",
+            "science",
+            "other",
+          ],
+        },
+      }),
+    });
+    const { labels, scores } = await response.json();
 
-  //   const threshold = 0.25;
+    const threshold = 0.25;
 
-  //   const dominantCategories = labels.filter(
-  //     (_: string, index: number) => scores[index] > scores[0] - threshold
-  //   );
-  //   categories = dominantCategories;
-  // } catch (error) {
-  //   throw new Error("Could not be determine of post category");
-  // }
+    const dominantCategories = labels.filter(
+      (_: string, index: number) => scores[index] > scores[0] - threshold
+    );
+    categories = dominantCategories;
+  } catch (error) {
+    throw new Error("Could not be determine of post category");
+  }
   try {
     await prisma.post.update({
       where: {
