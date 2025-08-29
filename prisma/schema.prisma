@@ -140,6 +140,8 @@ model View {
   postId String
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId String
+
+  @@unique([userId,postId])
 }
 
 model Comment {
@@ -159,6 +161,8 @@ model Like {
   userId String
   post   Post   @relation(fields: [postId], references: [id], onDelete: Cascade)
   postId String
+
+  @@unique([userId,postId])
 }
 
 model Saved {
