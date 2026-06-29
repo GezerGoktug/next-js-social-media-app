@@ -7,6 +7,7 @@ import prisma from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
 import { getUserId } from "../util/getUserInfos";
 import handleNotify from "../notifications/handleNotify";
+import { MediaQueryVariablesType } from "@/types/types";
 
 const createComment = async (formData: FormData) => {
   const mediaFile = formData.get("mediaFile");
@@ -26,7 +27,7 @@ const createComment = async (formData: FormData) => {
 
   let media_url;
 
-  let media = null;
+  let media: MediaQueryVariablesType = null;
   const commentId = uuidv7();
   try {
     if (mediaFile) {

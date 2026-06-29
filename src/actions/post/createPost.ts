@@ -5,6 +5,7 @@ import { getUserId } from "../util/getUserInfos";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { storage } from "@/lib/firebase";
 import { v7 as uuidv7 } from "uuid";
+import { MediaQueryVariablesType } from "@/types/types";
 
 const createPost = async (formData: FormData) => {
   const mediaFile = formData.get("mediaFile");
@@ -23,7 +24,7 @@ const createPost = async (formData: FormData) => {
 
   let media_url;
 
-  let media = null;
+  let media: MediaQueryVariablesType = null;
   const postId = uuidv7();
   try {
     if (mediaFile) {
@@ -71,7 +72,7 @@ const createPost = async (formData: FormData) => {
       }),
     });
 
-    const  { labels, scores } = await response.json();
+    const { labels, scores } = await response.json();
 
     const threshold = 0.25;
 

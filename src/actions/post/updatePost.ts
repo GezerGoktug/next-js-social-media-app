@@ -9,6 +9,7 @@ import {
 import { getUserId } from "../util/getUserInfos";
 import { storage } from "@/lib/firebase";
 import prisma from "@/lib/prisma";
+import { MediaQueryVariablesType } from "@/types/types";
 
 const updatePost = async (formData: FormData) => {
   const mediaFile = formData.get("mediaFile");
@@ -27,7 +28,7 @@ const updatePost = async (formData: FormData) => {
     throw new Error("You must provide either content or a media file");
 
   let media_url;
-  let media = null;
+  let media: MediaQueryVariablesType = null;
   const currentMedia = await prisma.media.findUnique({
     where: {
       postId: postId,

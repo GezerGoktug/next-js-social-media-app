@@ -25,6 +25,13 @@ export type MediaType = {
   file: File;
 };
 
+export type MediaQueryVariablesType = {
+  media: Partial<Record<"create" | "update", {
+    type: "IMAGE" | "VIDEO";
+    url: string;
+  }>>
+} | null
+
 export type CompleteProfileType = {
   username: string;
   country: string;
@@ -76,7 +83,7 @@ export interface PostType {
   isReposted: boolean;
   isSaved: boolean;
   isMyPost: boolean;
-  category:string[];
+  category: string[];
   user: {
     username: string | null;
     name: string;
@@ -104,6 +111,8 @@ export interface PostType {
     image: string | null;
   };
 }
+
+
 
 export type PostDetailType = PostType & { comments: CommentType[] };
 
@@ -154,6 +163,6 @@ export interface FriendReqItemType {
 }
 
 export interface queryType {
-  query:string,
-  type:"category" | "tag" | "search"
+  query: string,
+  type: "category" | "tag" | "search"
 } 

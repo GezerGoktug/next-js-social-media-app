@@ -2,6 +2,7 @@ import { getUserId } from "@/actions/util/getUserInfos";
 import { UnauthorizedError } from "@/error/UnauthorizedError";
 import { storage } from "@/lib/firebase";
 import prisma from "@/lib/prisma";
+import { MediaQueryVariablesType } from "@/types/types";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { NextRequest, NextResponse } from "next/server";
 import { v7 as uuidv7 } from "uuid";
@@ -35,7 +36,7 @@ export async function POST(req: Request) {
   }
 
   let media_url;
-  let media = null;
+  let media: MediaQueryVariablesType = null;
   if (mediaFile) {
     try {
       if (mediaFile) {

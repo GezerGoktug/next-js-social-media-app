@@ -1,16 +1,29 @@
-FROM node:18-alpine AS builder
+FROM node:18-alpine AS base
 
-RUN apk add --no-cache openssl
+FROM base AS dependencies
+
+RUN apk add --no-cache openssl  
 
 WORKDIR /app
 
 COPY package.json package-lock.json ./
 RUN npm install
 
+FROM dependencies AS builder
+
+WORKDIR /app
+
+COPY --from=dependencies /app/node_modules ./node_modules
+
 COPY . .
+
+COPY prisma ./prisma
+
+RUN npx prisma generate
+
 RUN npm run build
 
-FROM node:18-alpine AS production
+FROM node:18-alpine AS runner
 
 RUN apk add --no-cache openssl
 
